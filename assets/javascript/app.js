@@ -1,6 +1,6 @@
 
-
-var number = 120
+var count = 0;
+var number = 120;
 var questions=[{
    id:"question1",
 question: "what does “intergluteal cleft” stand for?",
@@ -49,9 +49,7 @@ question:  "The largest living organism is?",
 answer: "aspen grove",
 answers:  ["blue whale", "aspen grove", "honey fungus"],
 }]
-// console.log("script");
-// this onclick is based on the ID for Start button//
-//.on = listener
+
 $("#start").on("click", run, (event)=>{
 //  prevent default//
    event.preventDefault()
@@ -66,7 +64,7 @@ var number = 100;
 
 var intervalId;
 
-// $("#start").on("click", run);
+
 
 function run() {
 
@@ -81,6 +79,10 @@ function decrement() {
   if (number === 0) {
     stop();
     alert("Time Up!");
+    //count answers right 
+    //count answers wrong
+    //display on screen
+    
   }
 }
 
