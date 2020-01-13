@@ -1,5 +1,5 @@
 
-var count = 0;
+
 var number = 120;
 var questions=[{
    id:"question1",
@@ -32,39 +32,42 @@ answer:  "1972",
 answers:  ["1940", "1969", "1972", "1976"], 
 },
 {
-  id:"question5",
+  id:"question6",
 question:  "Which animal is reponsible for the most power outages?",
 answer: "squirrel", 
 answers: ["monkey", "bird", "squirrel", "racoons"],
 },
 {
-  id:"question6",
+  id:"question7",
 question:  "What nut is a member of the peach family?",
 answer: "almond",
 answers:  ["pistachio", "walnut", "brazilian", "almond"],
 },
 {
-  id:"question7",
+  id:"question8",
 question:  "The largest living organism is?",
 answer: "aspen grove",
 answers:  ["blue whale", "aspen grove", "honey fungus"],
 }]
 
-$("#start").on("click", run, (event)=>{
+$("#start").on("click", (event)=>{
 //  prevent default//
    event.preventDefault()
    console.log("click working")
-   setInterval
    printQuestions()
-   
+   run()
+   $("#game-container").prepend("<div id ='show-number'>")
  
 
 })
-var number = 100;
+
+var counter = 3;
 
 var intervalId;
 
+var answer=0;
 
+var wrongAnswers=0;
 
 function run() {
 
@@ -73,71 +76,77 @@ function run() {
 }
 
 function decrement() {
-  number--;
-  $("#show-number").html("<h2>" + number + "</h2>");
-
-  if (number === 0) {
+  console.log(counter);
+  counter--;
+  $("#show-number").html("<h2>" + counter + "</h2>");
+  if (counter === 0) {
     stop();
-    alert("Time Up!");
+    // alert("Times Up!");
+    console.log(counter);
     //count answers right 
     //count answers wrong
     //display on screen
     
   }
-}
 
+}
 function stop() {
   clearInterval(intervalId);
 }
 
-run();
+
 
 function printQuestions(){
-  $("#game-container").empty()
-  var gameContainer= $("#game-container")
-  //appending div to container
-  // gameContainer.append(question)
-  //Looping through object at answers key at integer count
-  //Go to whatever integer index is in questions
-  //find answers key
-  //loop through to print answers
-
-  //this loop prints each button to a list so that we can add it underneath our answer
-  
-  for(let q = 0; q < questions.length; q++){
-    var question = $("<h3>").text(questions[q].question)
-    gameContainer.append(question)
-    var answerList=$("<ul>")
-    for(i=0;i < questions[q].answers.length;i++){
-      const li = $("<li>")
-      //ListItem holds each item that is a radio button
-      let inputItem = $("<input type='radio' class='answer-button'>").attr("name", questions[q].id).attr("value", questions[q].answers[i])
-      let answerText = $("<div>").append(questions[q].answers[i])
-      //append each list item with a button to the answerList
-      inputItem.appendTo(li)
-      answerText.appendTo(li)
-      answerList.append(li)
-  }
-  gameContainer.append(answerList)
-}
-  var submitButton = $("<button>").attr("id", "submit");
-
-  gameContainer.append(submitButton)
-
-  $("#submit").on("click",function() {
-    var radioValue = $("input:checked");
     
-    console.log("clicking")
-    var gameContainer= $("#game-container")
-    for(let i=0; i<radioValue.length;i++){
-      var question = $("<h3>").text(radioValue[i].name)
-      gameContainer.append(question)
-      var answer = $("<div>").text(radioValue[i].value)
-      gameContainer.append(answer)
-    }
+    $("#game-container").empty()
+     var gameContainer= $("#game-container")
  
-  })
-
+     for(let q = 0; q < questions.length; q++){
+          var question = $("<h3>").text(questions[q].question)
+          gameContainer.append(question)
+          var answerList=$("<ul>")
+   
+          for(i=0;i < questions[q].answers.length;i++){
+           const li = $("<li>")
+      //ListItem holds each item that is a radio button
+           var inputItem = $("<input type='radio' class='answer-button'>").attr("name", questions[q].id).attr("value", questions[q].answers[i])
+           var answerText = $("<div>").append(questions[q].answers[i])
+      //append each list item with a button to the answerList
+              inputItem.appendTo(li)
+              answerText.appendTo(li)
+              answerList.append(li)
+  }
+       gameContainer.append(answerList)
 }
 
-  
+      var submitButton = $("<button>").attr("id", "submit");
+
+      gameContainer.append(submitButton)
+
+     $("#submit").on("click",function() {
+        var radioValue = $("input:checked");
+    
+        console.log("clicking")
+           
+        var gameContainer= $("#game-container")
+        gameContainer.hide()
+           
+        for(var i=0; i<radioValue.length;i++){
+
+          if (radioValue == (questions[i].question.answer)){
+            answer ++;
+          }
+          else{
+
+            wrongAnswers ++;
+
+          }
+        }
+           result = $("<div id ='results'>");
+           
+           result.html('<p> "you got" + answer + "answers right" "you got" + wrongAnswers + "wrong!" </p>');
+          
+           $("<body>").append(result)
+    
+ 
+    })}
