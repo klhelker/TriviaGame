@@ -1,6 +1,12 @@
+var counter = 30;
 
+var intervalId;
 
-var number = 120;
+var answer=0;
+
+var wrongAnswers=0;
+
+// var number = 120;
 var questions=[{
    id:"question1",
 question: "what does “intergluteal cleft” stand for?",
@@ -52,22 +58,24 @@ answers:  ["blue whale", "aspen grove", "honey fungus"],
 
 $("#start").on("click", (event)=>{
 //  prevent default//
+   divClone=$("#game-container").clone(true)
    event.preventDefault()
    console.log("click working")
    printQuestions()
    run()
    $("#game-container").prepend("<div id ='show-number'>")
- 
+
+   
 
 })
 
-var counter = 3;
+// var counter = 30;
 
-var intervalId;
+// var intervalId;
 
-var answer=0;
+// var answer=0;
 
-var wrongAnswers=0;
+// var wrongAnswers=0;
 
 function run() {
 
@@ -142,11 +150,17 @@ function printQuestions(){
 
           }
         }
+
+
            result = $("<div id ='results'>");
            
-           result.html('<p> "you got" + answer + "answers right" "you got" + wrongAnswers + "wrong!" </p>');
-          
-           $("<body>").append(result)
-    
- 
-    })}
+           result.html("you got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
+           $("body").html(result)
+           $("body").append("<button id='reset'> reset game </button>")
+           $("#reset").on("click",function() {
+              $("body").html(divClone.clone(true))
+              
+              run()
+            
+           })
+          })}
