@@ -1,4 +1,4 @@
-var counter = 30;
+var counter = 60;
 
 var intervalId;
 
@@ -6,16 +6,16 @@ var answer=0;
 
 var wrongAnswers=0;
 
-// var number = 120;
+
 var questions=[{
    id:"question1",
-question: "what does “intergluteal cleft” stand for?",
+question: "What does “intergluteal cleft” stand for?",
 answer: "butt crack",
 answers:  ["butt crack", "armpit", "valley between two moutains", "buttock surgery"],
 },
 {
   id:"question2",
-question: "how many teeth do snails have?", 
+question: "How many teeth do snails have?", 
 answer: "14,000",
 answers:  ["25", "4", "14,000", "600"],
 },
@@ -80,14 +80,14 @@ $("#start").on("click", (event)=>{
 function run() {
 
   clearInterval(intervalId);
-  counter = 30;
+  counter = 60;
   intervalId = setInterval(decrement, 1000);
 }
 
 function decrement() {
   console.log(counter);
   counter--;
-  $("#show-number").html("<h2>" + counter + "</h2>");
+  $("#show-number").html("<h2>" + "You have " + counter + " seconds to complete the quiz!"+ "</h2>");
   if (counter === 0) {
     stop();
     var radioValue = $("input:checked");
@@ -108,24 +108,17 @@ function decrement() {
 
       }
     }
-
-
        result = $("<div id ='results'>");
        
-       result.html("you got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
+       result.html("You got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
        $("body").html(result)
        $("body").append("<button id='reset'> reset game </button>")
        $("#reset").on("click",function() {
-          $("body").html(divClone.clone(true))
+        ("body").html(divClone.clone(true))
           
           run()
         
        })
-    // alert("Times Up!");
-    console.log(counter);
-    //count answers right 
-    //count answers wrong
-    //display on screen
     
   }
 
@@ -133,8 +126,6 @@ function decrement() {
 function stop() {
   clearInterval(intervalId);
 }
-
-
 
 function printQuestions(){
     
@@ -159,12 +150,14 @@ function printQuestions(){
        gameContainer.append(answerList)
 }
 
-      var submitButton = $("<button>").attr("id", "submit");
+      var submitButton = $("<button id= 'Submit'> Submit </button >").attr("id", "submit");
 
       gameContainer.append(submitButton)
 
      $("#submit").on("click",function() {
-        
+      
+        $(window).scrollTop(0); 
+    
         var radioValue = $("input:checked");
     
         console.log("clicking")
@@ -187,7 +180,7 @@ function printQuestions(){
 
            result = $("<div id ='results'>");
            
-           result.html("you got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
+           result.html("You got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
            $("body").html(result)
            $("body").append("<button id='reset'> reset game </button>")
            $("#reset").on("click",function() {
