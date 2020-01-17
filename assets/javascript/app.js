@@ -80,6 +80,7 @@ $("#start").on("click", (event)=>{
 function run() {
 
   clearInterval(intervalId);
+  counter = 30;
   intervalId = setInterval(decrement, 1000);
 }
 
@@ -89,6 +90,37 @@ function decrement() {
   $("#show-number").html("<h2>" + counter + "</h2>");
   if (counter === 0) {
     stop();
+    var radioValue = $("input:checked");
+    
+    console.log("clicking")
+       
+    var gameContainer= $("#game-container")
+    gameContainer.hide()
+       
+    for(var i=0; i<radioValue.length;i++){
+
+      if (radioValue == (questions[i].question.answer)){
+        answer ++;
+      }
+      else{
+
+        wrongAnswers ++;
+
+      }
+    }
+
+
+       result = $("<div id ='results'>");
+       
+       result.html("you got " + answer + " answers right. You got " + wrongAnswers + " wrong!");
+       $("body").html(result)
+       $("body").append("<button id='reset'> reset game </button>")
+       $("#reset").on("click",function() {
+          $("body").html(divClone.clone(true))
+          
+          run()
+        
+       })
     // alert("Times Up!");
     console.log(counter);
     //count answers right 
@@ -132,6 +164,7 @@ function printQuestions(){
       gameContainer.append(submitButton)
 
      $("#submit").on("click",function() {
+        
         var radioValue = $("input:checked");
     
         console.log("clicking")
