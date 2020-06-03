@@ -99,7 +99,7 @@ function decrement() {
        
     for(var i=0; i<radioValue.length;i++){
 
-      if (radioValue == (questions[i].question.answer)){
+      if (radioValue === (questions[i].question.answer)){
         answer ++;
       }
       else{
@@ -167,7 +167,7 @@ function printQuestions(){
            
         for(var i=0; i<radioValue.length;i++){
 
-          if (radioValue == (questions[i].question.answer)){
+          if (radioValue === (questions[i].question.answer)){
             answer ++;
           }
           else{
